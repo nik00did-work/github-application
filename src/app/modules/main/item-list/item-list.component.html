@@ -1,0 +1,38 @@
+<div class="wrapper">
+  <div class="wrapper__content">
+    <div class="content__spinner"
+         *ngIf="(isShowSpinner$ | async) as isShowSpinner; else items"
+    >
+      <app-spinner
+        [size]="60"
+        [strokeWidth]="2"
+        [strokeOpacity]="0.5"
+      ></app-spinner>
+    </div>
+  </div>
+</div>
+
+<ng-template #items>
+  <div class="content__items"
+       *ngIf="repositories.length"
+  >
+    <div class="items__filters">
+      filters
+    </div>
+    <cdk-virtual-scroll-viewport
+      class="scrollStyles"
+      itemSize="30"
+      minBufferPx="30"
+      maxBufferPx="60"
+    >
+      <div class="items__list">
+        <div class="list__item"
+             *ngFor="let item of repositories"
+        >
+          <div class="item__name">{{item.name}}</div>
+          <span class="item__url">{{item.url}}</span>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</ng-template>

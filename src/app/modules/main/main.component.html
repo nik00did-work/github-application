@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="wrapper__search">
+    <app-input
+      title="search"
+      value="{{search}}"
+      placeHolder="..."
+      (onInputCallback)="onInputCallback($event)"
+    ></app-input>
+  </div>
+  <div class="wrapper__items">
+    <app-item-list></app-item-list>
+  </div>
+</div>

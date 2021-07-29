@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>{{title}}</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="value"
+      (input)="onInput($event)"
+      placeholder="{{placeHolder}}"
+    >
+  </mat-form-field>
+</div>
