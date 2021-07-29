@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
 export class SpinnerComponent {
   @Input() size: number =  20;
   @Input() strokeWidth: number = 2;
-  @Input() strokeColor: string = 'white';
+  @Input() strokeColor: string = 'darkslategrey';
   @Input() strokeOpacity: number = 0.5;
 }
