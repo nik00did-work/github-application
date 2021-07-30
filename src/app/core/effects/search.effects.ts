@@ -17,11 +17,10 @@ export class SearchEffects {
 
   public sendGithubRequestBySearch = createEffect(() => this.actions.pipe(
     ofType(UserLocalSettingsActions.sendGithubRequestBySearch),
+    map(action => `https://api.github.com/search/repositories?q=${action.payload}&per_page=100`),
     debounceTime(500),
-    switchMap(action => this.searchService.sendGetRequest(action.payload).pipe(
+    switchMap(url => this.searchService.sendGetRequest(url).pipe(
       map(data => {
-        console.log('data', data);
-
         this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: false }));
 
         return UserLocalSettingsActions.setResponse({ payload: data })
@@ -29,6 +28,21 @@ export class SearchEffects {
       catchError(error => {
         console.log('error', error);
         throw new Error('sendGithubRequestBySearch error');
+      })
+    ))
+  ));
+
+  public sendGithubRequestByCurrentRepositoryUrl = createEffect(() => this.actions.pipe(
+    ofType(UserLocalSettingsActions.sendGithubRequestByCurrentRepositoryUrl),
+    switchMap(action => this.searchService.sendGetRequest(action.payload).pipe(
+      map(data => {
+        this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: false }));
+
+        return UserLocalSettingsActions.setCurrentRepositoryData({ payload: data });
+      }),
+      catchError(error => {
+        console.log('error', error);
+        throw new Error('sendGithubRequestByCurrentRepositoryUrl error');
       })
     ))
   ));
@@ -46,5 +60,11 @@ export class SearchEffects {
 
       this.store.dispatch(UserLocalSettingsActions.setRepositoriesDataStore({ payload: data }))
     })
-  ), { dispatch: false })
+  ), { dispatch: false });
+
+  public setCurrentRepositoryData = createEffect(() => this.actions.pipe(
+    ofType(UserLocalSettingsActions.setCurrentRepositoryData),
+    map(action => action.payload),
+    map( data => UserLocalSettingsActions.setCurrentRepositoryDataStore({ payload: data }))
+  ));
 }

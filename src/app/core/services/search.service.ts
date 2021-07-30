@@ -10,13 +10,12 @@ export class SearchService {
     private httpClient: HttpClient
   ) {}
 
-  public sendGetRequest(search: string): Observable<string> {
+  public sendGetRequest(url: string): Observable<string> {
     const options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
       }),
     };
-    const url = `https://api.github.com/search/repositories?q=${search}`;
 
     return this.httpClient.get<string>(url, options)
   }

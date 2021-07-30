@@ -6,6 +6,10 @@ import { IUserLocalSettings } from '../models';
 export const initialState: IUserLocalSettings = {
   search: '',
   isShowSpinner: false,
+  repositoryFilters: {
+    openIssues: '0',
+  },
+  currentRepository: null,
 };
 
 const _userLocalSettingsReducer = createReducer(
@@ -17,6 +21,17 @@ const _userLocalSettingsReducer = createReducer(
   on(actions.setIsShowSpinnerStore, (state, { payload }) => ({
     ...state,
     isShowSpinner: payload,
+  })),
+  on(actions.setOpenIssuesValueStore, (state, { payload }) => ({
+    ...state,
+    repositoryFilters: {
+      ...state.repositoryFilters,
+      openIssues: payload,
+    },
+  })),
+  on(actions.setCurrentRepositoryDataStore, (state, { payload }) => ({
+    ...state,
+    currentRepository: payload,
   })),
 );
 

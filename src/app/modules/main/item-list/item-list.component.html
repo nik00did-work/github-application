@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="wrapper__content">
     <div class="content__spinner"
-         *ngIf="(isShowSpinner$ | async) as isShowSpinner; else items"
+         *ngIf="isShowSpinner$ | async; else items"
     >
       <app-spinner
         [size]="60"
@@ -11,13 +11,13 @@
     </div>
   </div>
 </div>
-
+<!-- TODO create stub failed search -->
 <ng-template #items>
   <div class="content__items"
-       *ngIf="repositories.length"
+       *ngIf="filteredRepositories.length && (search$ | async)"
   >
     <div class="items__filters">
-      filters
+      <app-filters></app-filters>
     </div>
     <cdk-virtual-scroll-viewport
       class="scrollStyles"
@@ -27,10 +27,11 @@
     >
       <div class="items__list">
         <div class="list__item"
-             *ngFor="let item of repositories"
+             *ngFor="let item of filteredRepositories"
+             (click)="onClickItem(item.url)"
         >
           <div class="item__name">{{item.name}}</div>
-          <span class="item__url">{{item.url}}</span>
+          <span class="item__url">{{item.html_url}}</span>
         </div>
       </div>
     </cdk-virtual-scroll-viewport>

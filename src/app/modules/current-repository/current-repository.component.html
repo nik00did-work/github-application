@@ -1,0 +1,8 @@
+<div class="wrapper">
+  <header class="wrapper_header">Repository</header>
+  <main class="wrapper_main"
+        *ngIf="(currentRepository$ | async) as currentRepository;"
+  >
+    {{currentRepository.name}}
+  </main>
+</div>

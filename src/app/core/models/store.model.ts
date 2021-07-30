@@ -6,9 +6,17 @@ export interface IModel {
   repositories: RepositoryItem[];
 }
 
+export type OpenIssue = '0' | '10' | '100' | '300';
+
+export interface IRepositoryFilters {
+  openIssues: OpenIssue;
+}
+
 export interface IUserLocalSettings {
   search: string;
   isShowSpinner: boolean;
+  repositoryFilters: IRepositoryFilters;
+  currentRepository: RepositoryItem | null;
 }
 
 export interface IStore {

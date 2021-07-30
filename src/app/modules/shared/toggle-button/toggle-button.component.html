@@ -1,0 +1,18 @@
+<p>
+  Open issues more then:
+  <mat-button-toggle-group
+    appearance="legacy"
+    name="fontStyle"
+    aria-label="Font Style"
+    [value]="selectedItem"
+    #group="matButtonToggleGroup"
+    (change)="onChangeItem(group.value)"
+  >
+    <mat-button-toggle
+      *ngFor="let item of itemList"
+      value="{{item}}"
+    >
+      {{item}}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</p>
