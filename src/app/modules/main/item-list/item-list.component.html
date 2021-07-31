@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="wrapper__content">
+  <div class="wrapper__content content">
     <div class="content__spinner"
          *ngIf="isShowSpinner$ | async; else items"
     >
@@ -13,7 +13,7 @@
 </div>
 <!-- TODO create stub failed search -->
 <ng-template #items>
-  <div class="content__items"
+  <div class="content__items items"
        *ngIf="filteredRepositories.length && (search$ | async)"
   >
     <div class="items__filters">
@@ -25,13 +25,16 @@
       minBufferPx="30"
       maxBufferPx="60"
     >
-      <div class="items__list">
-        <div class="list__item"
+      <div class="items__list list">
+        <div class="list__item item"
              *ngFor="let item of filteredRepositories"
-             (click)="onClickItem(item.url)"
         >
-          <div class="item__name">{{item.name}}</div>
-          <span class="item__url">{{item.html_url}}</span>
+          <app-repository-item
+            [item]="item"
+            [keyList]="keyList"
+            [ngStyle]="{'width': '100%', 'height': '100%'}"
+            (onClickItem)="onClickItem($event)"
+          ></app-repository-item>
         </div>
       </div>
     </cdk-virtual-scroll-viewport>

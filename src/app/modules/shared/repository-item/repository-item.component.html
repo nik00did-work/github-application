@@ -1,0 +1,15 @@
+<div class="wrapper"
+     (click)="handleItemClick(item)"
+>
+  <div class="wrapper__title title">
+    <div class="title__value">{{item.name}}</div>
+  </div>
+  <div class="wrapper__description description">
+    <div class="description__item item"
+         *ngFor="let itemKey of keyList"
+    >
+      <div class="item__key">{{itemKey}}:</div>
+      <div class="item__value">{{item[itemKey] || 'null'}}</div>
+    </div>
+  </div>
+</div>

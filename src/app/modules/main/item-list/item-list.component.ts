@@ -29,6 +29,15 @@ export class ItemListComponent implements OnInit {
 
   public repositories: RepositoryItem[] = [];
   public filteredRepositories: RepositoryItem[] = [];
+  public keyList: string[] = [
+    'name',
+    'full_name',
+    'url',
+    'open_issues',
+    'private',
+    'homepage',
+    'language',
+  ];
 
   public constructor (
     private store: Store,
@@ -57,8 +66,8 @@ export class ItemListComponent implements OnInit {
   }
 
   public onClickItem(url: string) {
+    this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: true }));
     this.store.dispatch(UserLocalSettingsActions.sendGithubRequestByCurrentRepositoryUrl({ payload: url }));
-    console.log('url', url);
     this.router.navigateByUrl('/current-repository').then(() => console.log('/current-repository'));
   }
 }
