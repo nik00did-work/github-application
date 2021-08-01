@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import {IStore, IUserLocalSettings, OpenIssue, RepositoryItem} from '../models';
+import { IStore, IUserLocalSettings, OpenIssue, IRepositoryItem } from '../models';
 
 export const selectUserLocalSettings = createFeatureSelector<IStore, IUserLocalSettings>('userLocalSettings');
 
@@ -20,6 +20,6 @@ export const selectRepositoryFiltersOpenIssues = createSelector(
 
 export const selectCurrentRepository = createSelector(
   selectUserLocalSettings,
-  (userLocalSettings: IUserLocalSettings): any => userLocalSettings.currentRepository,//set types
+  (userLocalSettings: IUserLocalSettings): IRepositoryItem | null => userLocalSettings.currentRepository,
 );
 

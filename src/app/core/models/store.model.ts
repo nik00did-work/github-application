@@ -1,9 +1,9 @@
-export interface RepositoryItem {
+export interface IRepositoryItem {
   [key: string]: any;
 }
 
 export interface IModel {
-  repositories: RepositoryItem[];
+  repositories: IRepositoryItem[];
 }
 
 export type OpenIssue = '0' | '10' | '100' | '300';
@@ -16,10 +16,10 @@ export interface IUserLocalSettings {
   search: string;
   isShowSpinner: boolean;
   repositoryFilters: IRepositoryFilters;
-  currentRepository: RepositoryItem | null;
+  currentRepository: IRepositoryItem | null;
 }
 
 export interface IStore {
   model?: IModel;
-  userLocalSettings?: IUserLocalSettings;//TODO check for void 0
+  userLocalSettings?: IUserLocalSettings;
 }

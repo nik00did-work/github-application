@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+
 import { OpenIssue } from '../../../../core/models';
 import { selectRepositoryFiltersOpenIssues } from '../../../../core/selectors';
 import { UserLocalSettingsActions } from '../../../../core/actions';
@@ -12,14 +13,13 @@ import { UserLocalSettingsActions } from '../../../../core/actions';
 })
 export class FiltersComponent {
   public openIssues$: Observable<OpenIssue> = this.store.pipe(select(selectRepositoryFiltersOpenIssues));
-
   public openIssuesValues: OpenIssue[] = ['0', '10', '100', '300'];
 
   public constructor(
     private store: Store
   ) {}
 
-  setOpenIssues(value: string) {
+  public setOpenIssues(value: OpenIssue): void {
     this.store.dispatch(UserLocalSettingsActions.setOpenIssuesValueStore({ payload: value }));
   }
 }

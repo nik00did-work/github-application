@@ -18,10 +18,10 @@ import { RepositoryItemComponent } from './repository-item/repository-item.compo
     RepositoryItemComponent
   ],
   exports: [
-      InputComponent,
-      SpinnerComponent,
-      ToggleButtonComponent,
-      RepositoryItemComponent,
+    InputComponent,
+    SpinnerComponent,
+    ToggleButtonComponent,
+    RepositoryItemComponent,
   ],
   imports: [
     FormsModule,

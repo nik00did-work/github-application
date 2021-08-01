@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
-import { UserLocalSettingsActions } from '../../core/actions';
 
+import { GithubActions, UserLocalSettingsActions } from '../../core/actions';
 import { selectSearch } from '../../core/selectors';
 
 @Component({
@@ -17,9 +17,11 @@ export class MainComponent implements OnInit {
 
   public search: string = '';
 
-  public constructor (private store: Store) {}
+  public constructor (
+    private store: Store
+  ) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.search$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(search => this.search = search);
@@ -33,6 +35,6 @@ export class MainComponent implements OnInit {
     }
 
     this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: true }));
-    this.store.dispatch(UserLocalSettingsActions.sendGithubRequestBySearch({ payload: value }));
+    this.store.dispatch(GithubActions.sendGithubRequestBySearch({ payload: value }));
   }
 }

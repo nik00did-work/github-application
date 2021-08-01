@@ -11,7 +11,7 @@ export class ToggleButtonComponent {
 
   @Output() onChangeCallback = new EventEmitter();
 
-  public onChangeItem(value: string) {
+  public onChangeItem(value: string): void {
     this.onChangeCallback.emit(value);
   }
 }

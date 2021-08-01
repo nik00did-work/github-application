@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 
 import { GithubService } from '../services';
-import { ResponseActions, UserLocalSettingsActions } from '../actions';
+import { GithubActions, ResponseActions, UserLocalSettingsActions } from '../actions';
 
 @Injectable()
 export class GithubEffects {
@@ -15,7 +15,7 @@ export class GithubEffects {
   ) {}
 
   public sendGithubRequestBySearch = createEffect(() => this.actions.pipe(
-    ofType(UserLocalSettingsActions.sendGithubRequestBySearch),
+    ofType(GithubActions.sendGithubRequestBySearch),
     map(action => `https://api.github.com/search/repositories?q=${action.payload}&per_page=100`),
     debounceTime(500),
     switchMap(url => this.searchService.sendGetRequest(url).pipe(
@@ -32,7 +32,7 @@ export class GithubEffects {
   ));
 
   public sendGithubRequestByCurrentRepositoryUrl = createEffect(() => this.actions.pipe(
-    ofType(UserLocalSettingsActions.sendGithubRequestByCurrentRepositoryUrl),
+    ofType(GithubActions.sendGithubRequestByCurrentRepositoryUrl),
     switchMap(action => this.searchService.sendGetRequest(action.payload).pipe(
       map(data => {
         this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: false }));

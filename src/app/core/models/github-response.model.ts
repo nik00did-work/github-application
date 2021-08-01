@@ -1,7 +1,7 @@
-import { RepositoryItem } from './store.model';
+import { IRepositoryItem } from './store.model';
 
 export interface IGithubResponse {
-  items: RepositoryItem[];
+  items: IRepositoryItem[];
   incomplete_results: boolean;
   total_count: number;
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RepositoryItem } from '../../../core/models';
+import { IRepositoryItem } from '../../../core/models';
 
 @Component({
   selector: 'app-repository-item',
@@ -7,12 +7,12 @@ import { RepositoryItem } from '../../../core/models';
   styleUrls: ['./repository-item.component.less']
 })
 export class RepositoryItemComponent {
-  @Input() item: RepositoryItem = {};
+  @Input() item: IRepositoryItem = {};
   @Input() keyList: string[] = [];
 
   @Output() onClickItem = new EventEmitter();
 
-  public handleItemClick(item: any) {
+  public handleItemClick(item: IRepositoryItem): void {
     this.onClickItem.emit(item.url);
   }
 }

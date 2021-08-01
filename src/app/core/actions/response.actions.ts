@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import constants from '../../constants';
-import { IGithubResponse } from '../models';
+import { IGithubResponse, IRepositoryItem } from '../models';
 
 export const setGithubRequestBySearchResponse = createAction(
   constants.SET_GITHUB_REQUEST_BY_SEARCH_RESPONSE,
@@ -9,5 +9,5 @@ export const setGithubRequestBySearchResponse = createAction(
 
 export const setGithubRequestByCurrentRepositoryUrlResponse = createAction(
   constants.SET_GITHUB_REQUEST_BY_CURRENT_REPOSITORY_URL_RESPONSE,
-  props<{ payload: any }>()
+  props<{ payload: IRepositoryItem }>()
 );

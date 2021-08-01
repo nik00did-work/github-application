@@ -10,8 +10,8 @@ import {
   selectIsShowSpinner,
   selectRepositoryFiltersOpenIssues
 } from '../../../core/selectors';
-import { OpenIssue, RepositoryItem } from '../../../core/models';
-import {UserLocalSettingsActions} from "../../../core/actions";
+import { OpenIssue, IRepositoryItem } from '../../../core/models';
+import { GithubActions, UserLocalSettingsActions } from "../../../core/actions";
 
 @Component({
   selector: 'app-item-list',
@@ -22,14 +22,14 @@ export class ItemListComponent implements OnInit {
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   private openIssues$: Observable<OpenIssue> = this.store.pipe(select(selectRepositoryFiltersOpenIssues));
-  private repositories$: Observable<RepositoryItem[]> = this.store.pipe(select(selectRepositories));
+  private repositories$: Observable<IRepositoryItem[]> = this.store.pipe(select(selectRepositories));
 
   public search$: Observable<string> = this.store.pipe(select(selectSearch));
   public isShowSpinner$: Observable<boolean> = this.store.pipe(select(selectIsShowSpinner));
   public openIssues: OpenIssue = '0';
 
-  public repositories: RepositoryItem[] = [];
-  public filteredRepositories: RepositoryItem[] = [];
+  public repositories: IRepositoryItem[] = [];
+  public filteredRepositories: IRepositoryItem[] = [];
   public keyList: string[] = [
     'name',
     'full_name',
@@ -61,14 +61,14 @@ export class ItemListComponent implements OnInit {
       });
   }
 
-  public getFilteredRepositoryList() {
+  public getFilteredRepositoryList(): void {
     this.filteredRepositories = this.repositories
       .filter(repository => repository['open_issues'] > this.openIssues);
   }
 
-  public onClickItem(url: string) {
+  public onClickItem(url: string): void {
     this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: true }));
-    this.store.dispatch(UserLocalSettingsActions.sendGithubRequestByCurrentRepositoryUrl({ payload: url }));
+    this.store.dispatch(GithubActions.sendGithubRequestByCurrentRepositoryUrl({ payload: url }));
     this.router.navigateByUrl('/current-repository').then(() => console.log('/current-repository'));
   }
 }
