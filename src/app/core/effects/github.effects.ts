@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
-import { catchError, debounceTime, map, switchMap, withLatestFrom, mergeMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 
-import { SearchService } from '../services';
-import { UserLocalSettingsActions } from '../actions';
-import { selectSearch } from '../selectors';
+import { GithubService } from '../services';
+import { ResponseActions, UserLocalSettingsActions } from '../actions';
 
 @Injectable()
-export class SearchEffects {
+export class GithubEffects {
   public constructor(
     private store: Store,
     private actions: Actions,
-    private searchService: SearchService,
+    private searchService: GithubService,
   ) {}
 
   public sendGithubRequestBySearch = createEffect(() => this.actions.pipe(
@@ -23,7 +22,7 @@ export class SearchEffects {
       map(data => {
         this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: false }));
 
-        return UserLocalSettingsActions.setResponse({ payload: data })
+        return ResponseActions.setGithubRequestBySearchResponse({ payload: data })
       }),
       catchError(error => {
         console.log('error', error);
@@ -38,33 +37,12 @@ export class SearchEffects {
       map(data => {
         this.store.dispatch(UserLocalSettingsActions.setIsShowSpinnerStore({ payload: false }));
 
-        return UserLocalSettingsActions.setCurrentRepositoryData({ payload: data });
+        return ResponseActions.setGithubRequestByCurrentRepositoryUrlResponse({ payload: data });
       }),
       catchError(error => {
         console.log('error', error);
         throw new Error('sendGithubRequestByCurrentRepositoryUrl error');
       })
     ))
-  ));
-
-  public setResponse = createEffect(() => this.actions.pipe(
-    ofType(UserLocalSettingsActions.setResponse),
-    map(action => action.payload),
-    withLatestFrom(this.store.pipe(select(selectSearch))),
-    mergeMap(async ([data, search]) => {
-      console.log('setResponse data, payload', data, search);
-
-      if (!search) {//TODO check condition
-        return;
-      }
-
-      this.store.dispatch(UserLocalSettingsActions.setRepositoriesDataStore({ payload: data }))
-    })
-  ), { dispatch: false });
-
-  public setCurrentRepositoryData = createEffect(() => this.actions.pipe(
-    ofType(UserLocalSettingsActions.setCurrentRepositoryData),
-    map(action => action.payload),
-    map( data => UserLocalSettingsActions.setCurrentRepositoryDataStore({ payload: data }))
   ));
 }

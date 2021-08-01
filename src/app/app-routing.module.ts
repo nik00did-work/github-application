@@ -9,7 +9,7 @@ const routers: Routes = [
   {
     path: 'current-repository',
     loadChildren: () => import('src/app/modules/current-repository/current-repository.module').then(module => module.CurrentRepositoryModule)
-  }, //TODO use guard
+  },
 ];
 
 @NgModule({

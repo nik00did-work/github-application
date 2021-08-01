@@ -15,6 +15,7 @@ export class CurrentRepositoryComponent {
   public keyList: string[] = [
     'name',
     'full_name',
+    'description',
     'id',
     'node_id',
     'url',

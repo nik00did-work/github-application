@@ -10,8 +10,7 @@ export class InputComponent {
   @Input() public title: string = '';
   @Input() public placeHolder: string = '';
 
-  @Output()
-  public onInputCallback = new EventEmitter();
+  @Output() public onInputCallback = new EventEmitter();
 
   public onInput(event: Event): void {
     const value = (<HTMLInputElement> event.target).value;

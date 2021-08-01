@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
+import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
 import {
   selectSearch,
   selectRepositories,
@@ -8,9 +11,7 @@ import {
   selectRepositoryFiltersOpenIssues
 } from '../../../core/selectors';
 import { OpenIssue, RepositoryItem } from '../../../core/models';
-import { takeUntil } from 'rxjs/operators';
 import {UserLocalSettingsActions} from "../../../core/actions";
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-item-list',

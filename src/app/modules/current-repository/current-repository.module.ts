@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CurrentRepositoryComponent } from './current-repository.component';
 import { SharedModule } from '../shared/shared.module';
 import { CurrentRepositoryRoutingModule } from './current-repository-routing.module';
+
+import { CurrentRepositoryComponent } from './current-repository.component';
 
 @NgModule({
   declarations: [

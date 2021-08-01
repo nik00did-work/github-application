@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { SharedModule } from '../shared/shared.module';
+import { MainRoutingModule } from './main-routing.module';
+
 import { MainComponent } from './main.component';
 import { FiltersComponent } from './item-list/filters/filters.component';
-import { MainRoutingModule } from './main-routing.module';
 import { ItemListComponent } from './item-list/item-list.component';
 
 @NgModule({

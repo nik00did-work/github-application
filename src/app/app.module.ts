@@ -5,10 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MainModule } from './modules/main/main.module';
 import { CoreModule } from './core/core.module';
-import { AppComponent } from './app.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CurrentRepositoryModule } from './modules/current-repository/current-repository.module';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [

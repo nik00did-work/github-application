@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { IModel } from '../models';
-import { UserLocalSettingsActions as actions } from '../actions';
+import { ModelActions as actions } from '../actions';
 
 const initState: IModel = {
   repositories: [],
@@ -11,7 +11,7 @@ const _modelReducer = createReducer(
   initState,
   on(actions.setRepositoriesDataStore, (state, { payload }) => ({
       ...state,
-      repositories: payload.items,
+      repositories: payload,
   })),
 );
 

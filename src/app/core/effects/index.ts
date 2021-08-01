@@ -1,5 +1,7 @@
-import { SearchEffects } from './search.effects';
+import { GithubEffects } from './github.effects';
+import { ResponseEffects } from './response.effects';
 
 export const effects = [
-  SearchEffects,
+  GithubEffects,
+  ResponseEffects,
 ];
