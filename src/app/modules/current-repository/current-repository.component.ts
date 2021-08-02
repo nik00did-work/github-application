@@ -30,6 +30,9 @@ export class CurrentRepositoryComponent {
     'teams_url',
     'archive_url',
     'blobs_url',
+    'network_count',
+    'subscribers_count',
+    'temp_clone_token',
   ];
 
   constructor(private store: Store) { }
