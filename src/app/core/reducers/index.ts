@@ -11,11 +11,7 @@ import { modelReducer } from './model.reducer';
 import { userLocalSettingsReducer } from './user-local-settings.reducer';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
-  return function(state, action) {
-    !environment.production && ((window as any).getState = (): any => state);
-
-    return reducer(state, action);
-  };
+  return (state, action) => reducer(state, action);
 }
 
 export const reducers: ActionReducerMap<IStore> = {
