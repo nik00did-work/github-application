@@ -14,7 +14,7 @@
 
 <ng-template #items>
   <div class="content__items items"
-       *ngIf="filteredRepositories.length && (search$ | async)"
+       *ngIf="filteredRepositories.length && (search$ | async); else emptyState"
   >
     <div class="items__filters">
       <app-filters></app-filters>
@@ -38,5 +38,11 @@
         </div>
       </div>
     </cdk-virtual-scroll-viewport>
+  </div>
+</ng-template>
+
+<ng-template #emptyState>
+  <div class="content__empty-state">
+    No match results
   </div>
 </ng-template>
