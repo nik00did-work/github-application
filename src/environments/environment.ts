@@ -10,7 +10,9 @@ export const environment = {
 
 export const extModules = [
   StoreDevtoolsModule.instrument({
-    maxAge: 25
+    maxAge: 25,
+    logOnly: environment.production,
+    autoPause: true,
   })
 ];
 
